@@ -3,9 +3,12 @@ import { View, Text } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
+import SearchBar from "./src/components/SearchBar";
+
 const SearchScreen = () => {
   return (
     <View>
+      <SearchBar />
       <Text>Home Screen</Text>
     </View>
   );
