@@ -1,35 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import SearchBar from "./src/components/SearchBar";
-import yelp from "./src/api/yelp";
+import useResults from "./src/hooks/useResults";
 
 const SearchScreen = () => {
   const [term, setTerm] = useState("");
-  const [results, setResults] = useState([]);
-  const [errorMessage, setErrorMessage] = useState("");
-
-  const searchApi = async (searchTerm) => {
-    console.log("Hi There!");
-    try {
-      const response = await yelp.get("/search", {
-        params: {
-          limit: 50,
-          term: searchTerm,
-          location: "san jose",
-        },
-      });
-      setResults(response.data.businesses);
-    } catch (err) {
-      setErrorMessage("Something Went Wrong");
-    }
-  };
-
-  // call searchApi when component
-  // is first rendered. BAD CODE
-  searchApi("pasta");
+  const [results, errorMessage, searchApi] = useResults();
 
   return (
     <View>
