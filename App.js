@@ -7,9 +7,7 @@ import SearchBar from "./src/components/SearchBar";
 import useResults from "./src/hooks/useResults";
 import ResultsList from "./src/components/ResultsList";
 
-const SearchScreen = (props) => {
-  console.log(props);
-
+const SearchScreen = ({ navigation }) => {
   const [term, setTerm] = useState("");
   const [results, errorMessage, searchApi] = useResults();
 
@@ -32,14 +30,28 @@ const SearchScreen = (props) => {
         <ResultsList
           results={filterResultsByPrice("$")}
           title="Cost Effective"
+          navigation={navigation}
         />
-        <ResultsList results={filterResultsByPrice("$$")} title="Bit Pricier" />
+        <ResultsList
+          results={filterResultsByPrice("$$")}
+          title="Bit Pricier"
+          navigation={navigation}
+        />
         <ResultsList
           results={filterResultsByPrice("$$$")}
           title="Big Spender"
+          navigation={navigation}
         />
       </ScrollView>
     </>
+  );
+};
+
+const ResultsShowSearch = () => {
+  return (
+    <View>
+      <Text>Results Show Search</Text>
+    </View>
   );
 };
 
@@ -50,6 +62,7 @@ function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Business Search" component={SearchScreen} />
+        <Stack.Screen name="ResultsShowSearch" component={ResultsShowSearch} />
       </Stack.Navigator>
     </NavigationContainer>
   );
