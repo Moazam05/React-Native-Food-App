@@ -7,7 +7,9 @@ import SearchBar from "./src/components/SearchBar";
 import useResults from "./src/hooks/useResults";
 import ResultsList from "./src/components/ResultsList";
 
-const SearchScreen = () => {
+const SearchScreen = (props) => {
+  console.log(props);
+
   const [term, setTerm] = useState("");
   const [results, errorMessage, searchApi] = useResults();
 
@@ -19,14 +21,13 @@ const SearchScreen = () => {
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <>
       <SearchBar
         term={term}
         onTermChange={setTerm}
         onTermSubmit={() => searchApi(term)}
       />
       {errorMessage ? <Text>{errorMessage}</Text> : null}
-      <Text>We have Found {results.length} Results </Text>
       <ScrollView>
         <ResultsList
           results={filterResultsByPrice("$")}
@@ -38,7 +39,7 @@ const SearchScreen = () => {
           title="Big Spender"
         />
       </ScrollView>
-    </View>
+    </>
   );
 };
 
