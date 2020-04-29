@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  FlatList,
+  Image,
+  StyleSheet,
+} from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -48,17 +55,45 @@ const SearchScreen = ({ navigation }) => {
   );
 };
 
-const ResultsShowScreen = ({ navigation, route }) => {
+const ResultsShowScreen = ({ route }) => {
+  const [result, setResult] = useState(null);
   const { id } = route.params;
-  console.log(id);
+
+  const getResult = async (id) => {
+    const response = await yelp.get(`/${id}`);
+    setResult(response.data);
+  };
+
+  useEffect(() => {
+    getResult(id);
+  }, []);
+
+  if (!result) {
+    return null;
+  }
 
   return (
     <View>
-      <Text>Results Show</Text>
-      {/* <Text>id: </Text> */}
+      <Text>{result.name}</Text>
+      <FlatList
+        data={result.photos}
+        keyExtractor={(photo) => photo}
+        renderItem={({ item }) => {
+          return (
+            <Image style={{ height: 200, width: 300 }} source={{ uri: item }} />
+          );
+        }}
+      />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  image: {
+    height: 200,
+    width: 300,
+  },
+});
 
 const Stack = createStackNavigator();
 
