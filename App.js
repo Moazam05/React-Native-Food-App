@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, ScrollView } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -6,6 +6,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import SearchBar from "./src/components/SearchBar";
 import useResults from "./src/hooks/useResults";
 import ResultsList from "./src/components/ResultsList";
+import yelp from "./src/api/yelp";
 
 const SearchScreen = ({ navigation }) => {
   const [term, setTerm] = useState("");
@@ -47,10 +48,14 @@ const SearchScreen = ({ navigation }) => {
   );
 };
 
-const ResultsShowSearch = () => {
+const ResultsShowScreen = ({ navigation, route }) => {
+  const { id } = route.params;
+  console.log(id);
+
   return (
     <View>
-      <Text>Results Show Search</Text>
+      <Text>Results Show</Text>
+      {/* <Text>id: </Text> */}
     </View>
   );
 };
@@ -62,7 +67,7 @@ function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Business Search" component={SearchScreen} />
-        <Stack.Screen name="ResultsShowSearch" component={ResultsShowSearch} />
+        <Stack.Screen name="ResultsShowScreen" component={ResultsShowScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

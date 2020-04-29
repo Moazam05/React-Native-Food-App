@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-const ResultsShowSearch = () => {
+const ResultsShowScreen = () => {
   return (
     <View>
       <Text>Results Show Search</Text>
@@ -11,4 +11,4 @@ const ResultsShowSearch = () => {
 
 const styles = StyleSheet.create({});
 
-export default ResultsShowSearch;
+export default ResultsShowScreen;
