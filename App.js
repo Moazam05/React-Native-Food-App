@@ -80,7 +80,10 @@ const ResultsShowScreen = ({ route }) => {
         keyExtractor={(photo) => photo}
         renderItem={({ item }) => {
           return (
-            <Image style={{ height: 200, width: 300 }} source={{ uri: item }} />
+            <Image
+              style={{ height: 200, width: 300, marginBottom: 10 }}
+              source={{ uri: item }}
+            />
           );
         }}
       />
